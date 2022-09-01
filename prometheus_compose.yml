@@ -2,6 +2,6 @@
 version: "3.0"
 services:
   prometheus:
-    build: .
+    build: ./
     ports:
-      -""
+      - 9090:9090
