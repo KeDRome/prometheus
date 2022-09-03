@@ -2,6 +2,23 @@
 version: "3.0"
 services:
   prometheus:
-    build: ./
+    image: bitnami/prometheus:2
     ports:
       - 9090:9090
+    volumes:
+      - /opt/prometheus:/opt/bitnami/prometheus/data
+    networks:
+      - prometheus
+
+  grafana:
+    image: grafana/grafana-enterprise:9.1.2-ubuntu
+    ports:
+      - 3000:3000
+    networks:
+      - prometheus
+    environment:
+      - GF_INSTALL_PLUGINS=alexanderzobnin-zabbix-app
+
+networks:
+  prometheus:
+    driver: bridge
